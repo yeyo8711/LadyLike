@@ -1,3 +1,3 @@
-const contractAddress = "0xE0118d1CA8f94BAab8B0eD48f2f262256A18B8fF";
- const pairAddress = "0x4f4f47e0d3144945a29340Ce6F81988422Aea599"
+const contractAddress = "0x14088fB50A708AA49cc628785821d2B115461Aa4";
+ const pairAddress = "0x53A931b19A5261C2347b494A7C760bA8D8a001E6"
  module.exports = { contractAddress, pairAddress };

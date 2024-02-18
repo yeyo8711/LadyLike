@@ -48,7 +48,7 @@ module.exports = {
     apiKey: process.env.ETHERSCAN_API_KEY, // eth
   },
   sourcify: {
-    enabled: false,
+    enabled: true,
   },
   solidity: {
     version: "0.8.22",

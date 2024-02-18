@@ -18,6 +18,7 @@ async function main() {
   // The amount you want to add liq with goes here. Repalce 0.05
   const addLiq = await Contract.addLiq({
     value: hre.ethers.parseEther("0.05"),
+    gasLimit: 300000,
   });
   await addLiq.wait();
   console.log(
