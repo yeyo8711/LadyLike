@@ -13,6 +13,8 @@
     "deploy-goerli": "npx hardhat run scripts/deploy.js --network goerli",
     "openTrade": "npx hardhat run scripts/openTrading.js",
     "burn": "npx hardhat run scripts/burn.js",
-    "renounce": "npx hardhat run scripts/renounce.js"
+    "renounce": "npx hardhat run scripts/renounce.js",
+    "verify-goerli": "npx hardhat run scripts/verify.js --network goerli",
+    "verify-eth": "npx hardhat run scripts/verify.js --network eth"
   }
 }

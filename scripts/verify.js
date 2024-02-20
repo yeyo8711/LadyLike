@@ -12,16 +12,17 @@ const provider = new ethers.JsonRpcProvider(rpc);
 const wallet = new ethers.Wallet(process.env.PK, provider);
 // Creates Contract Object
 const Contract = new ethers.Contract(contractAddress, contractABI, wallet);
-const Pair = new ethers.Contract(pairAddress, pairAbi, wallet);
 
-const OpenTrade = async () => {
-  // Renounce
-  console.log("Enabling Trading");
-  const openTrade = await Contract.openTrading({ gasLimit: 200000 });
-  await openTrade.wait();
-  console.log("Trading Now enabled. Tx Hash: ", openTrade.hash);
+const arguments = require("./arguments");
+
+const Verify = async () => {
+  await hre.run("verify:verify", {
+    address: contractAddress,
+    contract: `contracts/${contractName}.sol:${contractName}`,
+    constructorArguments: arguments,
+  });
 };
 
-OpenTrade().catch((error) => {
+Verify().catch((error) => {
   if (error) console.log(error);
 });

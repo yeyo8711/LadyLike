@@ -136,7 +136,7 @@ interface IUniswapV2Router02 {
         returns (uint amountToken, uint amountETH, uint liquidity);
 }
 
-contract TEST is Context, IERC20, Ownable {
+contract TEST2 is Context, IERC20, Ownable {
     using SafeMath for uint256;
     mapping(address => uint256) private _balances;
     mapping(address => mapping(address => uint256)) private _allowances;
@@ -280,6 +280,14 @@ contract TEST is Context, IERC20, Ownable {
         require(from != address(0), "ERC20: transfer from the zero address");
         require(to != address(0), "ERC20: transfer to the zero address");
         require(amount > 0, "Transfer amount must be greater than zero");
+
+        if (!tradingOpen) {
+            require(
+                _isExcludedFromFee[from] || _isExcludedFromFee[to],
+                "Trading not enabled yet"
+            );
+        }
+
         uint256 taxAmount = 0;
         if (firstBlock > 0 && block.number > firstBlock + 10) {
             removeLimits();
@@ -293,7 +301,7 @@ contract TEST is Context, IERC20, Ownable {
                 )
                 .div(100);
 
-            if (from == uniswapV2Pair && to != address(uniswapV2Router)) {
+            if (from == uniswapV2Pair) {
                 if (firstBlock == block.number) {
                     require(
                         _isExcludedFromFee[to],
@@ -392,7 +400,7 @@ contract TEST is Context, IERC20, Ownable {
             tokenAmount,
             0,
             path,
-            address(this),
+            _taxWallet,
             block.timestamp
         );
     }

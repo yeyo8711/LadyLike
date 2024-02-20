@@ -1,8 +1,9 @@
 require("dotenv").config();
 const { ethers } = require("ethers");
 const pairAbi = require("../ABIS/pairAbi.json");
-// MAKE SURE TO CHANGE THIS
-const contractABI = require("../artifacts/contracts/Test.sol/TEST.json").abi;
+const contractName = process.env.CONTRACT_NAME;
+const contractABI =
+  require(`../artifacts/contracts/${contractName}.sol/${contractName}.json`).abi;
 const { contractAddress, pairAddress } = require("./addresses");
 // MAKE SURE TO CHANGE PROVIDER TO DESIRED NETWORK
 const rpc = process.env.DEPLOY_RPC;
